@@ -1,6 +1,10 @@
 # photoswipe
 This is a re bundle version of Photoswipe v.5.4.4 from https://photoswipe.com
 
+## Screenshot
+
+![image](https://github.com/user-attachments/assets/ba4a0fda-54cf-474f-bd2d-3bce32a46527)
+
 ## Setup
 
 ![image](https://github.com/user-attachments/assets/6d9c7af2-f913-4882-a5b2-424a5db50bce)
