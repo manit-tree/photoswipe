@@ -89,6 +89,10 @@
 	height: 100%;
 }
 
+.pswp__container {
+  transition: transform 0.25s ease-in-out;
+}
+
 .pswp__img,
 .pswp__zoom-wrap {
 	width: auto;
