@@ -3105,7 +3105,9 @@ const KeyboardKeyCodesMap = {
   ArrowUp: 38,
   ArrowRight: 39,
   ArrowDown: 40,
-  Tab: 9
+  Tab: 9,
+  Space: 32,
+  Enter: 13
 };
 /**
  * @template {keyof KeyboardKeyCodesMap} T
@@ -3115,7 +3117,11 @@ const KeyboardKeyCodesMap = {
  */
 
 const getKeyboardEventKey = (key, isKeySupported) => {
-  return isKeySupported ? key : KeyboardKeyCodesMap[key];
+  if (key == ' ') {
+    return isKeySupported ? key : KeyboardKeyCodesMap['Space']; 
+  } else {
+    return isKeySupported ? key : KeyboardKeyCodesMap[key]; 
+  }
 };
 /**
  * - Manages keyboard shortcuts.
@@ -3223,6 +3229,16 @@ class Keyboard {
         break;
 
       case getKeyboardEventKey('ArrowRight', isKeySupported):
+        axis = 'x';
+        isForward = true;
+        break;
+
+      case getKeyboardEventKey(' ', isKeySupported):
+        axis = 'x';
+        isForward = true;
+        break;
+
+      case getKeyboardEventKey('Enter', isKeySupported):
         axis = 'x';
         isForward = true;
         break;
