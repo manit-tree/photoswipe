@@ -3356,7 +3356,6 @@ var Photoswipe = function() {
       let axis;
       let isForward = false;
       const isKeySupported = "key" in e;
-      console.log(e);
       switch (isKeySupported ? e.key : e.keyCode) {
         case getKeyboardEventKey("Escape", isKeySupported):
           if (pswp.options.escKey) {
