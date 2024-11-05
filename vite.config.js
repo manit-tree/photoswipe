@@ -7,15 +7,15 @@ export default defineConfig({
     },
     plugins: [cssInjectedByJsPlugin()],
     build: {
-        outDir: './dist/photoswipe',
+        outDir: './dist',
         lib: {
-            entry: './modules/photo-swipe/bundle.js',
+            entry: './src/index.js',
             name: 'Photoswipe',
-            formats: ['iife'],
-            fileName: () => 'photoswipe.js'
+            formats: ['iife','esm'],
+            fileName: (format) => `[name].[format].js`
         },
-        minify: false,
+        minify: true,
         sourcemap: false,
-        emptyOutDir: false
+        emptyOutDir: true
     }
 })

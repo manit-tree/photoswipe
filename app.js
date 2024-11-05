@@ -1,6 +1,7 @@
+import Photoswipe from './dist/index.es.js';
+
 document.addEventListener('DOMContentLoaded', evt => {
-    Photoswipe({
-      gallery: '#gallery',
-      children: 'a'      
-    })
+    let el = document.querySelector('#gallery');
+
+    Photoswipe(el, {children: 'a'});
 })
