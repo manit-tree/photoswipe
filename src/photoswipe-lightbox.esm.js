@@ -1705,6 +1705,12 @@ class PhotoSwipeLightbox extends PhotoSwipeBase {
 
 
   onThumbnailsClick(e) {
+    if (this.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+
     // Exit and allow default browser action if:
     if (specialKeyUsed(e) // ... if clicked with a special key (ctrl/cmd...)
     || window.pswp) {

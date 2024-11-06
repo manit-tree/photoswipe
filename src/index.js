@@ -7,4 +7,5 @@ export function photoswipe(el, options) {
     options.gallery = el;
     const lightbox = new PhotoSwipeLightbox(options)
     lightbox.init();  
+    return lightbox;
 }

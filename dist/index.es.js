@@ -647,6 +647,10 @@ class ct extends dt {
    * @param {MouseEvent} e
    */
   onThumbnailsClick(t) {
+    if (this.disabled) {
+      t.preventDefault(), t.stopPropagation();
+      return;
+    }
     if (tt(t) || window.pswp)
       return;
     let e = {
@@ -795,7 +799,7 @@ function T(o, t) {
   const e = Math.abs(o.x - t.x), i = Math.abs(o.y - t.y);
   return Math.sqrt(e * e + i * i);
 }
-function b(o, t) {
+function x(o, t) {
   return o.x === t.x && o.y === t.y;
 }
 function A(o, t, e) {
@@ -937,7 +941,7 @@ function q(o, t) {
     y: window.innerHeight
   };
 }
-function x(o, t, e, i, s) {
+function b(o, t, e, i, s) {
   let n = 0;
   if (t.paddingFn)
     n = t.paddingFn(e, i, s)[o];
@@ -951,8 +955,8 @@ function x(o, t, e, i, s) {
 }
 function K(o, t, e, i) {
   return {
-    x: t.x - x("left", o, t, e, i) - x("right", o, t, e, i),
-    y: t.y - x("top", o, t, e, i) - x("bottom", o, t, e, i)
+    x: t.x - b("left", o, t, e, i) - b("right", o, t, e, i),
+    y: t.y - b("top", o, t, e, i) - b("bottom", o, t, e, i)
   };
 }
 class gt {
@@ -992,7 +996,7 @@ class gt {
   _updateAxis(t) {
     const {
       pswp: e
-    } = this.slide, i = this.slide[t === "x" ? "width" : "height"] * this.currZoomLevel, n = x(t === "x" ? "left" : "top", e.options, e.viewportSize, this.slide.data, this.slide.index), r = this.slide.panAreaSize[t];
+    } = this.slide, i = this.slide[t === "x" ? "width" : "height"] * this.currZoomLevel, n = b(t === "x" ? "left" : "top", e.options, e.viewportSize, this.slide.data, this.slide.index), r = this.slide.panAreaSize[t];
     this.center[t] = Math.round((r - i) / 2) + n, this.max[t] = i > r ? Math.round(r - i) + n : this.center[t], this.min[t] = i > r ? n : this.center[t];
   }
   // _getZeroBounds
@@ -1547,11 +1551,11 @@ class It {
       n[t] = e;
   }
 }
-const Ct = 0.05, xt = 0.15;
+const Ct = 0.05, bt = 0.15;
 function B(o, t, e) {
   return o.x = (t.x + e.x) / 2, o.y = (t.y + e.y) / 2, o;
 }
-class bt {
+class xt {
   /**
    * @param {Gestures} gestures
    */
@@ -1597,7 +1601,7 @@ class bt {
           bgOpacity: d
         }).defaultPrevented || n.applyBgOpacity(d);
       } else
-        l = a - (a - l) * xt;
+        l = a - (a - l) * bt;
     else l > h && (l = h + (l - h) * Ct);
     r.pan.x = this._calculatePanForZoomLevel("x", l), r.pan.y = this._calculatePanForZoomLevel("y", l), r.setZoomLevel(l), r.applyCurrentZoomPan();
   }
@@ -1654,7 +1658,7 @@ class bt {
       x: i.bounds.correctPan("x", d.x),
       y: i.bounds.correctPan("y", d.y)
     }, i.setZoomLevel(s);
-    const c = !b(d, l);
+    const c = !x(d, l);
     if (!c && !r && !h) {
       i._setResolution(n), i.applyCurrentZoomPan();
       return;
@@ -1793,7 +1797,7 @@ class Tt {
     }, this._intervalP1 = {
       x: 0,
       y: 0
-    }, this._numActivePoints = 0, this._ongoingPointers = [], this._touchEventEnabled = "ontouchstart" in window, this._pointerEventEnabled = !!window.PointerEvent, this.supportsTouch = this._touchEventEnabled || this._pointerEventEnabled && navigator.maxTouchPoints > 1, this._numActivePoints = 0, this._intervalTime = 0, this._velocityCalculated = !1, this.isMultitouch = !1, this.isDragging = !1, this.isZooming = !1, this.raf = null, this._tapTimer = null, this.supportsTouch || (t.options.allowPanToNext = !1), this.drag = new It(this), this.zoomLevels = new bt(this), this.tapHandler = new Lt(this), t.on("bindEvents", () => {
+    }, this._numActivePoints = 0, this._ongoingPointers = [], this._touchEventEnabled = "ontouchstart" in window, this._pointerEventEnabled = !!window.PointerEvent, this.supportsTouch = this._touchEventEnabled || this._pointerEventEnabled && navigator.maxTouchPoints > 1, this._numActivePoints = 0, this._intervalTime = 0, this._velocityCalculated = !1, this.isMultitouch = !1, this.isDragging = !1, this.isZooming = !1, this.raf = null, this._tapTimer = null, this.supportsTouch || (t.options.allowPanToNext = !1), this.drag = new It(this), this.zoomLevels = new xt(this), this.tapHandler = new Lt(this), t.on("bindEvents", () => {
       t.events.add(
         t.scrollWrap,
         "click",
@@ -1883,7 +1887,7 @@ class Tt {
    * @private
    */
   _rafRenderLoop() {
-    (this.isDragging || this.isZooming) && (this._updateVelocity(), this.isDragging ? b(this.p1, this.prevP1) || this.drag.change() : (!b(this.p1, this.prevP1) || !b(this.p2, this.prevP2)) && this.zoomLevels.change(), this._updatePrevPoints(), this.raf = requestAnimationFrame(this._rafRenderLoop.bind(this)));
+    (this.isDragging || this.isZooming) && (this._updateVelocity(), this.isDragging ? x(this.p1, this.prevP1) || this.drag.change() : (!x(this.p1, this.prevP1) || !x(this.p2, this.prevP2)) && this.zoomLevels.change(), this._updatePrevPoints(), this.raf = requestAnimationFrame(this._rafRenderLoop.bind(this)));
   }
   /**
    * Update velocity at 50ms interval
@@ -3655,7 +3659,7 @@ class ce extends he {
     if (this.isDestroying)
       return;
     const e = q(this.options, this);
-    !t && b(e, this._prevViewportSize) || (p(this._prevViewportSize, e), this.dispatch("beforeResize"), p(this.viewportSize, this._prevViewportSize), this._updatePageScrollOffset(), this.dispatch("viewportSize"), this.mainScroll.resize(this.opener.isOpen), !this.hasMouse && window.matchMedia("(any-hover: hover)").matches && this.mouseDetected(), this.dispatch("resize"));
+    !t && x(e, this._prevViewportSize) || (p(this._prevViewportSize, e), this.dispatch("beforeResize"), p(this.viewportSize, this._prevViewportSize), this._updatePageScrollOffset(), this.dispatch("viewportSize"), this.mainScroll.resize(this.opener.isOpen), !this.hasMouse && window.matchMedia("(any-hover: hover)").matches && this.mouseDetected(), this.dispatch("resize"));
   }
   /**
    * @param {number} opacity
@@ -3739,7 +3743,9 @@ class ce extends he {
   }
 }
 function ge(o, t) {
-  t.pswpModule = () => ce, t.gallery = o, new ct(t).init();
+  t.pswpModule = () => ce, t.gallery = o;
+  const e = new ct(t);
+  return e.init(), e;
 }
 export {
   ge as photoswipe
