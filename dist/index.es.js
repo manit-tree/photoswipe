@@ -3742,5 +3742,5 @@ function ge(o, t) {
   t.pswpModule = () => ce, t.gallery = o, new ct(t).init();
 }
 export {
-  ge as default
+  ge as photoswipe
 };
